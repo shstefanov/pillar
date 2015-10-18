@@ -44,7 +44,8 @@ var prototypes = {
 
 }
 
-function Pillar(options){
+function Pillar(){
+	var options      = this.definition;
 	this.length      = 0;
 	this.max_length  = options.length;
 	this.validator   = {}
@@ -74,6 +75,14 @@ function Pillar(options){
 		}
 		this.column[name] = new Column(options.length);
 	}
+}
+
+Pillar.define = function(definition){
+	var proto = Object.create(this.prototype);
+	var constructor = function(){return Pillar.apply(this, arguments);};
+	constructor.prototype = proto;
+	constructor.prototype.definition = definition;
+	return constructor;
 }
 
 function invalidFieldTypeError(name){

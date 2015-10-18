@@ -1,11 +1,11 @@
-describe("TCollection", function(){
+describe("Pillar", function(){
 
 	var assert = require("assert");
 
-	var TCollection = require("../index.js");
+	var Pillar = require("../index.js");
 
 	it("Has apropriate typed arrays", function(next){
-		var collection = new TCollection({
+		var Collection = Pillar.define({
 			length: 1000,
 			fields:{
 				"Custom":        Object,
@@ -32,6 +32,8 @@ describe("TCollection", function(){
 			}
 
 		});
+
+		var collection = new Collection();
 
 		assert.equal(collection.length, 0);
 
@@ -62,7 +64,7 @@ describe("TCollection", function(){
 	var collection;
 	it("Adds some objects with fields of all types", function(next){
 
-		collection = new TCollection({
+		var Collection = Pillar.define({
 			length: 1000,
 			fields: {
 				"id":            "int",
@@ -88,6 +90,8 @@ describe("TCollection", function(){
 				"ref":           "ref",				
 			}
 		});
+
+		collection = new Collection();
 
 		for(var i=0;i<1000;i++){
 			collection.add({
@@ -158,13 +162,15 @@ describe("TCollection", function(){
 	});
 
 	it("Adds and removes objects", function(next){
-		var collection = new TCollection({
+		var Collection = Pillar.define({
 			length: 5,
 			fields: {
 				"aa": "int",
 				"bb": "string",
 			}
 		});
+
+		var collection = new Collection();
 
 		var indexes = [
 			collection.add({aa: 1,  bb: "str1"}),
@@ -192,13 +198,15 @@ describe("TCollection", function(){
 		var CustomType = function(){};
 		var OtherType  = function(){};
 
-		var collection = new TCollection({
+		var Collection = Pillar.define({
 			length: 5,
 			fields: {
 				"field_a": "int",
 				"field_b": CustomType,
 			}
 		});
+
+		var collection = new Collection();
 
 		var m_1 = collection.add({ field_a: 1, field_b: new CustomType()	});
 		assert.deepEqual(collection.get(m_1), { field_a: 1, field_b: new CustomType() });
@@ -215,7 +223,7 @@ describe("TCollection", function(){
 		var ClassA = function(v){ this.a = v};
 		var ClassB = function(v){ this.b = v};
 
-		var collection = new TCollection({
+		var Collection = Pillar.define({
 			length: 10,
 			fields: {
 
@@ -237,7 +245,7 @@ describe("TCollection", function(){
 
 			}
 		});
-
+		var collection = new Collection();
 
 		var i = collection.add({
 			field_a: new ClassA(6),
