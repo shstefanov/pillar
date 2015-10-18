@@ -1,0 +1,16 @@
+{
+  "name": "pillar",
+  "version": "0.0.1",
+  "private": false,
+  "author": {
+    "name": "Stefan Stefanov",
+    "email": "s.h.stefanov@mail.bg"
+  },
+
+  "devDependencies":{
+    "mocha": "latest"
+  },
+  "scripts":{
+    "test": "node node_modules/mocha/bin/mocha --recursive --colors --sort --check-leaks --no-exit --full-trace --throw-deprecation test"
+  }
+}
