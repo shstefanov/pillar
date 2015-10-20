@@ -81,6 +81,7 @@ Pillar.define = function(definition){
 	var proto = Object.create(this.prototype);
 	var constructor = function(){return Pillar.apply(this, arguments);};
 	constructor.prototype = proto;
+	if(definition.methods) for(var key in definition.methods) proto[key] = definition.methods[key];
 	constructor.prototype.definition = definition;
 	return constructor;
 }
@@ -199,6 +200,12 @@ Pillar.prototype.findOne = function(query){
 Pillar.prototype.each = function(fn){
 	var result = {}, index = this.index;
 	for(var i=0,m = index[0];i<index.length;i++,m=index[i]) fn(this.get(m, result), m, this) && this.set(i, result);
+}
+
+Pillar.prototype.toJSON = function(){
+	var index = this.index, len = index.length, result = new Array(index.length);
+	for(var i=0,m = index[0];i<len;i++,m=index[i]) result[i] = this.get(m);
+	return result;
 }
 
 module.exports = Pillar;

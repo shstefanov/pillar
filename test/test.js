@@ -280,5 +280,49 @@ describe("Pillar", function(){
 
 	});
 
+	it("Define type as object with options", function(next){
+		var ClassA = function(v){ this.a = v};
+		var ClassB = function(v){ this.b = v};
+
+		var Collection = Pillar.define({
+			length: 10,
+			fields: {
+				field_a: "int",
+				field_b: "string"
+
+			}
+		});
+		var collection = new Collection();
+
+		collection.add({ field_a:  1, field_b: "some_val_1"  });
+		collection.add({ field_a:  2, field_b: "some_val_2"  });
+		collection.add({ field_a:  3, field_b: "some_val_3"  });
+		collection.add({ field_a:  4, field_b: "some_val_4"  });
+		collection.add({ field_a:  5, field_b: "some_val_5"  });
+		collection.add({ field_a:  6, field_b: "some_val_6"  });
+		collection.add({ field_a:  7, field_b: "some_val_7"  });
+		collection.add({ field_a:  8, field_b: "some_val_8"  });
+		collection.add({ field_a:  9, field_b: "some_val_9"  });
+		collection.add({ field_a: 10, field_b: "some_val_10" });
+
+		var result = collection.toJSON();
+		
+		assert.deepEqual(result, [
+			{ field_a:  1, field_b: "some_val_1"  },
+			{ field_a:  2, field_b: "some_val_2"  },
+			{ field_a:  3, field_b: "some_val_3"  },
+			{ field_a:  4, field_b: "some_val_4"  },
+			{ field_a:  5, field_b: "some_val_5"  },
+			{ field_a:  6, field_b: "some_val_6"  },
+			{ field_a:  7, field_b: "some_val_7"  },
+			{ field_a:  8, field_b: "some_val_8"  },
+			{ field_a:  9, field_b: "some_val_9"  },
+			{ field_a: 10, field_b: "some_val_10" },
+		]);		
+
+		next();
+
+	});
+
 
 });
